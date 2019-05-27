@@ -19,7 +19,7 @@ public class LoginSteps {
     @Step
     public void goToLoginPage(){
         homepage.clickMyAccount();
-        homepage.clickLoginLink();
+        //homepage.clickLoginLink();
     }
 
     @Step
@@ -30,13 +30,14 @@ public class LoginSteps {
     }
 
     @Step
-    public void checkUserIsLoggedIn(){
-        myAccountPage.checkLoggedIn("asdasda asdasd");
+    public void checkUserIsLoggedIn(String email ){
+        myAccountPage.checkLoggedIn(email);
     }
 
     @Step
     public void checkUserNotLoggedIn(){
-        loginPage.checkErrorMessage();
+        loginPage.checkErrorMessageInvalidEmail();
+        loginPage.checkErrorMessageInvalidPassword("");
     }
 
     @Step

@@ -5,28 +5,28 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 
-@DefaultUrl("https://fasttrackit.org/selenium-test/customer/account/login/")
+@DefaultUrl("http://qa2.fasttrackit.org:8008/?page_id=7")
 public class LoginPage extends PageObject {
 
 
-    @FindBy(id = "email")
+    @FindBy(css = ".woocommerce-form-row  #username")
     private WebElementFacade emailField;
 
-    @FindBy(id = "pass")
+    @FindBy(css = ".woocommerce-form-row  #password")
     private WebElementFacade passField;
 
-    @FindBy(id = "send2")
+    @FindBy(css = "button.woocommerce-Button.button[name='login']")
     private WebElementFacade loginButton;
 
-    @FindBy(css = "li.error-msg span")
+    @FindBy(css = "ul.woocommerce-error")
     private WebElementFacade errorMessage;
 
-    public void setEmailField(String email){
-        typeInto(emailField, email);
+    public void setEmailField(String USER_NAME){
+        typeInto(emailField, USER_NAME);
     }
 
-    public void setPassField(String pass){
-        typeInto(passField, pass);
+    public void setPassField(String USER_PASS){
+        typeInto(passField, USER_PASS);
     }
 
     public void clickLoginButton(){
@@ -34,9 +34,14 @@ public class LoginPage extends PageObject {
     }
 
 
-    public void checkErrorMessage(){
-        errorMessage.shouldContainText("Invalid login or password.");
+    public void checkErrorMessageInvalidEmail(){
+        errorMessage.shouldContainText("Lost your password?");
     }
+
+    public void checkErrorMessageInvalidPassword(String email){
+        errorMessage.shouldContainText( email );
+    }
+
 
     public void checkUserIsOnLoginPage(){
         loginButton.shouldBeVisible();
